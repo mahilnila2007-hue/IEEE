@@ -34,6 +34,108 @@
             margin: 0 auto;
         }
 
+        .login-icon {
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .login-icon:hover {
+            background-color: rgba(255,255,255,0.1);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 15% auto;
+            padding: 2rem;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .modal-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-header h2 {
+            color: #1e3c72;
+            margin-bottom: 0.5rem;
+        }
+
+        .role-selection {
+            margin-bottom: 1.5rem;
+        }
+
+        .role-selection label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .role-selection select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 5px;
+            font-size: 1rem;
+            background: white;
+        }
+
+        .role-selection select:focus {
+            border-color: #1e3c72;
+            outline: none;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+        }
+
+        .modal-btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+
+        .modal-btn-primary {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+        }
+
+        .modal-btn-secondary {
+            background: #e0e0e0;
+            color: #333;
+        }
+
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 2rem;
+            cursor: pointer;
+            color: #666;
+        }
+
         .logo {
             display: flex;
             align-items: center;
@@ -382,8 +484,38 @@
                 <a href="#members">Members</a>
                 <a href="#resources">Resources</a>
             </nav>
+            <div class="login-icon" onclick="openLoginModal()">
+                <i class="fas fa-sign-in-alt"></i>
+            </div>
         </div>
     </header>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeLoginModal()">&times;</span>
+            <div class="modal-header">
+                <h2>Club Login</h2>
+                <p>Select your role to access the dashboard</p>
+            </div>
+            <form id="loginForm">
+                <div class="role-selection">
+                    <label for="role">Select Your Role:</label>
+                    <select id="role" name="role" required>
+                        <option value="">Choose your role...</option>
+                        <option value="president">President</option>
+                        <option value="vice-president">Vice President</option>
+                        <option value="secretary">Secretary</option>
+                        <option value="event-coordinator">Event Coordinator</option>
+                    </select>
+                </div>
+                <div class="modal-buttons">
+                    <button type="button" class="modal-btn modal-btn-secondary" onclick="closeLoginModal()">Cancel</button>
+                    <button type="submit" class="modal-btn modal-btn-primary">Login</button>
+                </div>
+            </form>
+        </div>
+    </div>
 
     <div class="container">
         <section class="welcome-section">
@@ -533,12 +665,51 @@
         <div class="footer-content">
             <p>&copy; 2025 IEEE Students Club. All rights reserved.</p>
             <div class="social-links">
-                <a href="#facebook"><i class="fab fa-facebook"></i></a>
-                <a href="#twitter"><i class="fab fa-twitter"></i></a>
-                <a href="#linkedin"><i class="fab fa-linkedin"></i></a>
-                <a href="#instagram"><i class="fab fa-instagram"></i></a>
+                <a href="mailto:ieeestudentsclub@gmail.com" title="Email Us">
+                    <i class="fas fa-envelope"></i>
+                    <span style="margin-left: 0.5rem; font-size: 0.9rem;">ieeestudentsclub@gmail.com</span>
+                </a>
             </div>
         </div>
     </footer>
+
+    <script>
+        function openLoginModal() {
+            document.getElementById('loginModal').style.display = 'block';
+        }
+
+        function closeLoginModal() {
+            document.getElementById('loginModal').style.display = 'none';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('loginModal');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        // Handle form submission
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const role = document.getElementById('role').value;
+            if (role) {
+                const roleNames = {
+                    'president': 'President',
+                    'vice-president': 'Vice President',
+                    'secretary': 'Secretary',
+                    'event-coordinator': 'Event Coordinator'
+                };
+                
+                alert(`Welcome ${roleNames[role]}! You have successfully logged in.`);
+                closeLoginModal();
+                
+                // Here you would typically redirect to a dashboard or enable certain features
+                // based on the selected role
+            }
+        });
+    </script>
 </body>
 </html>
