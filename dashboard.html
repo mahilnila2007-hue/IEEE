@@ -454,18 +454,16 @@
             <span class="close" onclick="closeLoginModal()">&times;</span>
             <div class="modal-header">
                 <h2>Club Login</h2>
-                <p>Select your role to access the dashboard</p>
+                <p>Enter your credentials to access the dashboard</p>
             </div>
             <form id="loginForm">
-                <div class="role-selection">
-                    <label for="role">Select Your Role:</label>
-                    <select id="role" name="role" required>
-                        <option value="">Choose your role...</option>
-                        <option value="president">President</option>
-                        <option value="vice-president">Vice President</option>
-                        <option value="secretary">Secretary</option>
-                        <option value="event-coordinator">Event Coordinator</option>
-                    </select>
+                <div class="form-group" style="margin-bottom: 1rem;">
+                    <label for="username" style="display: block; color: #333; font-weight: 500; margin-bottom: 0.5rem;">Username:</label>
+                    <input type="text" id="username" name="username" required style="width: 100%; padding: 0.75rem; border: 2px solid #e0e0e0; border-radius: 5px; font-size: 1rem; background: white;">
+                </div>
+                <div class="form-group" style="margin-bottom: 1.5rem;">
+                    <label for="password" style="display: block; color: #333; font-weight: 500; margin-bottom: 0.5rem;">Password:</label>
+                    <input type="password" id="password" name="password" required style="width: 100%; padding: 0.75rem; border: 2px solid #e0e0e0; border-radius: 5px; font-size: 1rem; background: white;">
                 </div>
                 <div class="modal-buttons">
                     <button type="button" class="modal-btn modal-btn-secondary" onclick="closeLoginModal()">Cancel</button>
@@ -504,37 +502,12 @@
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">Upcoming Events</h3>
-                        <a href="#all-events">View All</a>
+                        <a href="#all-events"> </a>
                     </div>
-                    <div class="event-item">
-                        <div class="event-date">
-                            <span class="day">15</span>
-                            <span class="month">Nov</span>
-                        </div>
-                        <div class="event-details">
-                            <h4>AI & Machine Learning Workshop</h4>
-                            <p>Learn the fundamentals of AI and ML with hands-on projects</p>
-                        </div>
-                    </div>
-                    <div class="event-item">
-                        <div class="event-date">
-                            <span class="day">22</span>
-                            <span class="month">Nov</span>
-                        </div>
-                        <div class="event-details">
-                            <h4>Robotics Competition</h4>
-                            <p>Showcase your robotics projects and compete with fellow engineers</p>
-                        </div>
-                    </div>
-                    <div class="event-item">
-                        <div class="event-date">
-                            <span class="day">28</span>
-                            <span class="month">Nov</span>
-                        </div>
-                        <div class="event-details">
-                            <h4>Career Development Seminar</h4>
-                            <p>Insights from industry professionals on career paths in engineering</p>
-                        </div>
+                    <div style="text-align: center; padding: 2rem; color: #666;">
+                        <i class="fas fa-calendar-alt" style="font-size: 3rem; color: #1e3c72; margin-bottom: 1rem;"></i>
+                        <p>No upcoming events scheduled at the moment.</p>
+                        <p style="font-size: 0.9rem; margin-top: 0.5rem;">Check back soon for new events!</p>
                     </div>
                 </div>
 
@@ -631,20 +604,17 @@
         document.getElementById('loginForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
-            const role = document.getElementById('role').value;
-            if (role) {
-                const roleNames = {
-                    'president': 'President',
-                    'vice-president': 'Vice President',
-                    'secretary': 'Secretary',
-                    'event-coordinator': 'Event Coordinator'
-                };
-                
-                alert(`Welcome ${roleNames[role]}! You have successfully logged in.`);
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            if (username && password) {
+                // Here you would typically send the credentials to a server for authentication
+                // For now, we'll just show a success message
+                alert(`Welcome ${username}! You have successfully logged in.`);
                 closeLoginModal();
                 
                 // Here you would typically redirect to a dashboard or enable certain features
-                // based on the selected role
+                // based on the user's authentication status
             }
         });
     </script>
