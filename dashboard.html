@@ -136,43 +136,6 @@
             color: #666;
         }
 
-        .login-toggle {
-            display: flex;
-            border-radius: 8px;
-            overflow: hidden;
-            border: 2px solid #1e3c72;
-        }
-
-        .toggle-btn {
-            flex: 1;
-            padding: 0.75rem 1rem;
-            border: none;
-            background: white;
-            color: #1e3c72;
-            cursor: pointer;
-            font-size: 0.9rem;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-
-        .toggle-btn.active {
-            background: #1e3c72;
-            color: white;
-        }
-
-        .toggle-btn:hover:not(.active) {
-            background: #e8f0fe;
-        }
-
-        .login-section {
-            animation: fadeIn 0.3s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
         .logo {
             display: flex;
             align-items: center;
@@ -491,45 +454,28 @@
             <span class="close" onclick="closeLoginModal()">&times;</span>
             <div class="modal-header">
                 <h2>Club Login</h2>
-                <p>Choose your login method</p>
+                <p>Enter your credentials and select your role</p>
             </div>
-
-            <!-- Login Method Toggle -->
-            <div class="login-toggle" style="margin-bottom: 1.5rem; text-align: center;">
-                <button type="button" id="credentialsBtn" class="toggle-btn active" onclick="switchLoginMethod('credentials')">Login with Credentials</button>
-                <button type="button" id="roleBtn" class="toggle-btn" onclick="switchLoginMethod('role')">Login with Role</button>
-            </div>
-
             <form id="loginForm">
-                <!-- Credentials Login -->
-                <div id="credentialsSection" class="login-section">
-                    <div class="form-group" style="margin-bottom: 1rem;">
-                        <label for="username" style="display: block; color: #333; font-weight: 500; margin-bottom: 0.5rem;">Username:</label>
-                        <input type="text" id="username" name="username" required style="width: 100%; padding: 0.75rem; border: 2px solid #e0e0e0; border-radius: 5px; font-size: 1rem; background: white;">
-                    </div>
-                    <div class="form-group" style="margin-bottom: 1.5rem;">
-                        <label for="password" style="display: block; color: #333; font-weight: 500; margin-bottom: 0.5rem;">Password:</label>
-                        <input type="password" id="password" name="password" required style="width: 100%; padding: 0.75rem; border: 2px solid #e0e0e0; border-radius: 5px; font-size: 1rem; background: white;">
-                    </div>
+                <div class="form-group" style="margin-bottom: 1rem;">
+                    <label for="username" style="display: block; color: #333; font-weight: 500; margin-bottom: 0.5rem;">Username:</label>
+                    <input type="text" id="username" name="username" required style="width: 100%; padding: 0.75rem; border: 2px solid #e0e0e0; border-radius: 5px; font-size: 1rem; background: white;">
                 </div>
-
-                <!-- Role Login -->
-                <div id="roleSection" class="login-section" style="display: none;">
-                    <div class="form-group" style="margin-bottom: 1.5rem;">
-                        <label for="role" style="display: block; color: #333; font-weight: 500; margin-bottom: 0.5rem;">Select Your Role:</label>
-                        <select id="role" name="role" onchange="setDefaultCredentials()" style="width: 100%; padding: 0.75rem; border: 2px solid #e0e0e0; border-radius: 5px; font-size: 1rem; background: white;">
-                            <option value="">Choose your role...</option>
-                            <option value="president">President</option>
-                            <option value="vice-president">Vice President</option>
-                            <option value="secretary">Secretary</option>
-                            <option value="event-coordinator">Event Coordinator</option>
-                        </select>
-                    </div>
-                    <div style="background: #f8f9fa; padding: 1rem; border-radius: 5px; margin-bottom: 1.5rem; font-size: 0.9rem; color: #666;">
-                        <strong>Default credentials will be set automatically when you select a role.</strong>
-                    </div>
+                <div class="form-group" style="margin-bottom: 1rem;">
+                    <label for="password" style="display: block; color: #333; font-weight: 500; margin-bottom: 0.5rem;">Password:</label>
+                    <input type="password" id="password" name="password" required style="width: 100%; padding: 0.75rem; border: 2px solid #e0e0e0; border-radius: 5px; font-size: 1rem; background: white;">
                 </div>
-
+                <div class="form-group" style="margin-bottom: 1.5rem;">
+                    <label for="role" style="display: block; color: #333; font-weight: 500; margin-bottom: 0.5rem;">Select Your Role:</label>
+                    <select id="role" name="role" required style="width: 100%; padding: 0.75rem; border: 2px solid #e0e0e0; border-radius: 5px; font-size: 1rem; background: white;">
+                        <option value="">Choose your role...</option>
+                        <option value="admin">Admin</option>
+                        <option value="president">President</option>
+                        <option value="vice-president">Vice President</option>
+                        <option value="secretary">Secretary</option>
+                        <option value="event-coordinator">Event Coordinator</option>
+                    </select>
+                </div>
                 <div class="modal-buttons">
                     <button type="button" class="modal-btn modal-btn-secondary" onclick="closeLoginModal()">Cancel</button>
                     <button type="submit" class="modal-btn modal-btn-primary">Login</button>
@@ -573,25 +519,6 @@
                         <i class="fas fa-calendar-alt" style="font-size: 3rem; color: #1e3c72; margin-bottom: 1rem;"></i>
                         <p>No upcoming events scheduled at the moment.</p>
                         <p style="font-size: 0.9rem; margin-top: 0.5rem;">Check back soon for new events!</p>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">Recent Activities</h3>
-                        <a href="#all-activities">View All</a>
-                    </div>
-                    <div class="activity-item">
-                        <p><strong>John Doe</strong> completed the IoT project milestone</p>
-                        <small style="color: #666;">2 hours ago</small>
-                    </div>
-                    <div class="activity-item" style="padding: 0.75rem 0; border-bottom: 1px solid #eee;">
-                        <p><strong>Sarah Smith</strong> joined the Embedded Systems committee</p>
-                        <small style="color: #666;">1 day ago</small>
-                    </div>
-                    <div class="activity-item" style="padding: 0.75rem 0;">
-                        <p><strong>Mike Johnson</strong> won first place in the coding competition</p>
-                        <small style="color: #666;">3 days ago</small>
                     </div>
                 </div>
             </div>
@@ -651,8 +578,6 @@
     <script>
         function openLoginModal() {
             document.getElementById('loginModal').style.display = 'block';
-            // Reset to credentials login by default
-            switchLoginMethod('credentials');
         }
 
         function closeLoginModal() {
@@ -669,62 +594,30 @@
             }
         }
 
-        // Switch between login methods
-        function switchLoginMethod(method) {
-            const credentialsBtn = document.getElementById('credentialsBtn');
-            const roleBtn = document.getElementById('roleBtn');
-            const credentialsSection = document.getElementById('credentialsSection');
-            const roleSection = document.getElementById('roleSection');
-
-            if (method === 'credentials') {
-                credentialsBtn.classList.add('active');
-                roleBtn.classList.remove('active');
-                credentialsSection.style.display = 'block';
-                roleSection.style.display = 'none';
-                // Clear role selection when switching to credentials
-                document.getElementById('role').value = '';
-            } else {
-                roleBtn.classList.add('active');
-                credentialsBtn.classList.remove('active');
-                roleSection.style.display = 'block';
-                credentialsSection.style.display = 'none';
-            }
-        }
-
-        // Set default credentials based on selected role
-        function setDefaultCredentials() {
-            const role = document.getElementById('role').value;
-            const usernameField = document.getElementById('username');
-            const passwordField = document.getElementById('password');
-
-            const defaultCredentials = {
-                'president': { username: 'president', password: 'president123' },
-                'vice-president': { username: 'vicepresident', password: 'vicepresident123' },
-                'secretary': { username: 'secretary', password: 'secretary123' },
-                'event-coordinator': { username: 'eventcoordinator', password: 'eventcoordinator123' }
-            };
-
-            if (role && defaultCredentials[role]) {
-                usernameField.value = defaultCredentials[role].username;
-                passwordField.value = defaultCredentials[role].password;
-            }
-        }
-
         // Handle form submission
         document.getElementById('loginForm').addEventListener('submit', function(e) {
             e.preventDefault();
 
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
+            const role = document.getElementById('role').value;
 
-            if (username && password) {
+            if (username && password && role) {
                 // Here you would typically send the credentials to a server for authentication
                 // For now, we'll just show a success message
-                alert(`Welcome ${username}! You have successfully logged in.`);
+                const roleNames = {
+                    'admin': 'Admin',
+                    'president': 'President',
+                    'vice-president': 'Vice President',
+                    'secretary': 'Secretary',
+                    'event-coordinator': 'Event Coordinator'
+                };
+
+                alert(`Welcome ${username} (${roleNames[role]})! You have successfully logged in.`);
                 closeLoginModal();
 
                 // Here you would typically redirect to a dashboard or enable certain features
-                // based on the user's authentication status
+                // based on the user's authentication status and role
             }
         });
     </script>
